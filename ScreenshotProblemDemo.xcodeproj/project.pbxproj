@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3176D5A7206C91E179D5FAEA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3176D4D6EA96ED1D9AB71884 /* WebViewController.m */; };
+		3176DC40DC03723E8F8C9505 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3176DDF1F99A30147A8B3403 /* back.png */; };
+		3176DE5E391591F51B39498E /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3176D9CC92AAA80DC906FCD7 /* forward@2x.png */; };
+		3176DE66CE49B5C79039241A /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 3176D612F0DFFC20355AE19F /* forward.png */; };
+		3176DF8224F06C82B22A0BEC /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3176DBA8A95687ECB4C170FC /* back@2x.png */; };
 		4FD2A8221787595F00C898D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD2A8211787595F00C898D4 /* UIKit.framework */; };
 		4FD2A8241787595F00C898D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD2A8231787595F00C898D4 /* Foundation.framework */; };
 		4FD2A8261787595F00C898D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD2A8251787595F00C898D4 /* CoreGraphics.framework */; };
@@ -22,6 +27,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3176D4D6EA96ED1D9AB71884 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		3176D612F0DFFC20355AE19F /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
+		3176D9A745DAA92A1F9A15FE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		3176D9CC92AAA80DC906FCD7 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
+		3176DBA8A95687ECB4C170FC /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		3176DDF1F99A30147A8B3403 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		4FD2A81E1787595F00C898D4 /* ScreenshotProblemDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenshotProblemDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD2A8211787595F00C898D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FD2A8231787595F00C898D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +104,8 @@
 				4FD2A83E178759D800C898D4 /* ScreenShotProblemViewController.h */,
 				4FD2A83F178759D800C898D4 /* ScreenShotProblemViewController.m */,
 				4FD2A840178759D800C898D4 /* ScreenShotProblemViewController.xib */,
+				3176D4D6EA96ED1D9AB71884 /* WebViewController.m */,
+				3176D9A745DAA92A1F9A15FE /* WebViewController.h */,
 			);
 			path = ScreenshotProblemDemo;
 			sourceTree = "<group>";
@@ -107,6 +120,10 @@
 				4FD2A8331787595F00C898D4 /* Default.png */,
 				4FD2A8351787595F00C898D4 /* Default@2x.png */,
 				4FD2A8371787595F00C898D4 /* Default-568h@2x.png */,
+				3176DDF1F99A30147A8B3403 /* back.png */,
+				3176DBA8A95687ECB4C170FC /* back@2x.png */,
+				3176D612F0DFFC20355AE19F /* forward.png */,
+				3176D9CC92AAA80DC906FCD7 /* forward@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -167,6 +184,10 @@
 				4FD2A8361787595F00C898D4 /* Default@2x.png in Resources */,
 				4FD2A8381787595F00C898D4 /* Default-568h@2x.png in Resources */,
 				4FD2A842178759D800C898D4 /* ScreenShotProblemViewController.xib in Resources */,
+				3176DC40DC03723E8F8C9505 /* back.png in Resources */,
+				3176DF8224F06C82B22A0BEC /* back@2x.png in Resources */,
+				3176DE66CE49B5C79039241A /* forward.png in Resources */,
+				3176DE5E391591F51B39498E /* forward@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +201,7 @@
 				4FD2A82E1787595F00C898D4 /* main.m in Sources */,
 				4FD2A8321787595F00C898D4 /* AppDelegate.m in Sources */,
 				4FD2A841178759D800C898D4 /* ScreenShotProblemViewController.m in Sources */,
+				3176D5A7206C91E179D5FAEA /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

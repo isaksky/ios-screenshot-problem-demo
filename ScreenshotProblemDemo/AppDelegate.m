@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ScreenShotProblemViewController.h"
+#import "WebViewController.h"
+
 
 @implementation AppDelegate
 
@@ -18,7 +19,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = [ScreenShotProblemViewController new];
+    self.window.rootViewController = [WebViewController new];
     
     return YES;
 }
