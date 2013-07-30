@@ -19,6 +19,10 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
     UILabel *_task_title_lbl;
     NSTimer *_screenShotTimer;
     int _numScreenShots;
+
+    // GCD
+    dispatch_source_t _timer_source;
+    dispatch_queue_t _queue;
 }
 
 @property(nonatomic, strong) UIWebView *webView;
@@ -81,9 +85,30 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
     [self.view addSubview:self.webView];
     [self show_task_body];
 
-    _screenShotTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-                                                      selector:@selector(takeScreenShot)
-                                                      userInfo:nil repeats:YES];
+
+    _queue = dispatch_queue_create("com.youeye.ios.recorders.screen", NULL); // will be a serial queue
+    //dispatch_set_target_queue(_queue, dispatch_get_main_queue());
+    dispatch_set_target_queue(_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
+
+    _timer_source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+    //dispatch_source_t timerSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+
+    dispatch_source_set_timer(
+            _timer_source,
+            dispatch_walltime(NULL, 0),
+            100ull * NSEC_PER_MSEC,
+            20ull * NSEC_PER_MSEC // leeway
+    );
+
+    __block typeof (self) weak_self = self; // using this ref to avoid retain cycle in block below
+    dispatch_source_set_event_handler(_timer_source, ^{
+        [weak_self takeScreenShotAux:nil];
+    });
+
+    dispatch_resume(_timer_source);
+//    _screenShotTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
+//                                                      selector:@selector(takeScreenShot)
+//                                                      userInfo:nil repeats:YES];
 }
 
 - (void)takeScreenShot {
@@ -97,7 +122,7 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 -(void)takeScreenShotAux:(id)o{
     NSLog(@"In takeScreenShot");
     //CALayer* copy = [self.view.layer presentationLayer];
-    CALayer *__strong copy = [self.view.layer presentationLayer];
+    CALayer *copy = self.view.layer;//[self.view.layer presentationLayer];
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, self.view.layer.contentsScale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [copy renderInContext:context];
@@ -109,21 +134,21 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
     _numScreenShots += 1;
     NSLog(@"_numScreenShots = %d", _numScreenShots);
 
-    if (_numScreenShots >= 10) {
+    if (_numScreenShots >= 1000) {
         [_screenShotTimer invalidate];
         _screenShotTimer = nil;
     }
 }
 
 - (void)saveScreenShot:(UIImage *)screenShot {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *screenShotPath = [documentsPath stringByAppendingPathComponent:
-            [NSString stringWithFormat:@"screenShot%d.png", _numScreenShots]];
-
-    NSData *screenShotData = UIImagePNGRepresentation(screenShot);
-    [[NSFileManager defaultManager] removeItemAtPath:screenShotPath error:nil];
-    assert([screenShotData writeToFile:screenShotPath atomically:YES]);
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsPath = [paths objectAtIndex:0];
+//    NSString *screenShotPath = [documentsPath stringByAppendingPathComponent:
+//            [NSString stringWithFormat:@"screenShot%d.png", _numScreenShots]];
+//
+//    NSData *screenShotData = UIImagePNGRepresentation(screenShot);
+//    [[NSFileManager defaultManager] removeItemAtPath:screenShotPath error:nil];
+//    assert([screenShotData writeToFile:screenShotPath atomically:YES]);
 }
 
 
