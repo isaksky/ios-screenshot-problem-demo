@@ -53,7 +53,7 @@
 -(void)takeScreenShotAux:(id)o{
     NSLog(@"In takeScreenShot");
     //CALayer* copy = [self.view.layer presentationLayer];
-    CALayer *__strong copy = [self.view.layer presentationLayer];
+    CALayer *copy = self.view.layer;
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, self.view.layer.contentsScale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [copy renderInContext:context];
