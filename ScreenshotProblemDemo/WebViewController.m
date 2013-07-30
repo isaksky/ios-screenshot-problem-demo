@@ -9,7 +9,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuartzCore/QuartzCore.h>
 #import "WebViewController.h"
-#import "Util.h"
 
 const float WEB_VIEW_TASK_BAR_HEIGHT = 44.f;
 const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
