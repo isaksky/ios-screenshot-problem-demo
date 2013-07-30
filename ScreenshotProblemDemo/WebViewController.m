@@ -15,9 +15,7 @@ const float WEB_VIEW_TASK_BAR_HEIGHT = 44.f;
 const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 
 @interface WebViewController () <UIWebViewDelegate> {
-    unsigned long _taskIdx;
     UILabel *_task_title_lbl;
-    NSTimer *_screenShotTimer;
     int _numScreenShots;
 
     // GCD
@@ -102,24 +100,13 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 
     __block typeof (self) weak_self = self; // using this ref to avoid retain cycle in block below
     dispatch_source_set_event_handler(_timer_source, ^{
-        [weak_self takeScreenShotAux:nil];
+        [weak_self takeScreenShot];
     });
 
     dispatch_resume(_timer_source);
-//    _screenShotTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-//                                                      selector:@selector(takeScreenShot)
-//                                                      userInfo:nil repeats:YES];
 }
 
 - (void)takeScreenShot {
-    [self performSelectorInBackground:@selector(takeScreenShotAux:) withObject:nil];
-
-//    also tried this, but same error:
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        [self takeScreenShotAux:nil];
-//    });
-}
--(void)takeScreenShotAux:(id)o{
     NSLog(@"In takeScreenShot");
     //CALayer* copy = [self.view.layer presentationLayer];
     CALayer *copy = self.view.layer;//[self.view.layer presentationLayer];
@@ -129,28 +116,11 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    [self saveScreenShot:image];
+    // Do something with screenshot. Not necessary to show bug.
 
     _numScreenShots += 1;
     NSLog(@"_numScreenShots = %d", _numScreenShots);
-
-    if (_numScreenShots >= 1000) {
-        [_screenShotTimer invalidate];
-        _screenShotTimer = nil;
-    }
 }
-
-- (void)saveScreenShot:(UIImage *)screenShot {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsPath = [paths objectAtIndex:0];
-//    NSString *screenShotPath = [documentsPath stringByAppendingPathComponent:
-//            [NSString stringWithFormat:@"screenShot%d.png", _numScreenShots]];
-//
-//    NSData *screenShotData = UIImagePNGRepresentation(screenShot);
-//    [[NSFileManager defaultManager] removeItemAtPath:screenShotPath error:nil];
-//    assert([screenShotData writeToFile:screenShotPath atomically:YES]);
-}
-
 
 #pragma mark Task controls
 
@@ -167,7 +137,6 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 
     [self update_task_title_lbl];
 
-
     NSArray *items = @[
             fixed_space,
             self.taskInfoBtn,
@@ -177,26 +146,14 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
             next_or_finish_btn
             , fixed_space
     ];
-    //self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-    //self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
     self.taskBar.items = items;
-
-
 }
 
 - (UIBarButtonItem *)taskInfoBtn {
     if (!taskInfoBtn) {
         UIButton *info_button = [UIButton buttonWithType:UIButtonTypeInfoLight];
         [info_button addTarget:self action:@selector(task_info_clicked:) forControlEvents:UIControlEventTouchUpInside];
-        //[UIBarButtonItem.alloc initWithBarButtonSystemItem:UIBarButtonSystem target:<#(id)target#> action:<#(SEL)action#>]
-//        task_info_btn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SVWebViewController.bundle/iPhone/back"]
-//                                                         style:UIBarButtonItemStylePlain
-//                                                        target:self
-//                                                        action:@selector(task_info_clicked:)];
         taskInfoBtn = [UIBarButtonItem .alloc initWithCustomView:info_button];
-        // These don't work, gotta do the thing above
-        // /task_info_btn.target = self;
-        //task_info_btn.action = @selector(task_info_clicked:);
         taskInfoBtn.width = 18.0f;
     }
     return taskInfoBtn;
@@ -206,7 +163,6 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
     if (!_task_title_lbl || !taskTitleItem) {
         _task_title_lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         [self update_task_title_lbl];
-//        _task_title_lbl.text = @"Task 1 / 5";
         _task_title_lbl.backgroundColor = [UIColor clearColor];
         _task_title_lbl.textColor = [UIColor whiteColor];
 
@@ -219,9 +175,9 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 - (UIBarButtonItem *)taskForwardBtn {
     if (!taskForwardBtn) {
         taskForwardBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SVWebViewController.bundle/iPhone/forward"]
-                                                            style:UIBarButtonItemStylePlain
-                                                           target:self
-                                                           action:@selector(task_forward_clicked:)];
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(task_forward_clicked:)];
         taskForwardBtn.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
         taskForwardBtn.width = 18.0f;
     }
@@ -255,8 +211,6 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
 #pragma mark Browser buttons
 
 - (void)update_browser_bar_items {
-    //UIBarButtonItem *refresh_or_stop_btn = self.web_view.isLoading ? self.browser_stop_btn : self.browser_refresh_btn;
-
     UIBarButtonItem *fixed_space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     fixed_space.width = 5.0f;
     UIBarButtonItem *flex_space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -270,8 +224,6 @@ const float WEB_VIEW_CONTROL_BAR_HEIGHT = 44.f;
             self.browserRefreshBtn
             , flex_space
     ];
-    //self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-    //self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
     self.bottomToolbar.items = items;
 
 }
