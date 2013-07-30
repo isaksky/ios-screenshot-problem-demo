@@ -21,7 +21,6 @@
 		4FD2A8341787595F00C898D4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2A8331787595F00C898D4 /* Default.png */; };
 		4FD2A8361787595F00C898D4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2A8351787595F00C898D4 /* Default@2x.png */; };
 		4FD2A8381787595F00C898D4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2A8371787595F00C898D4 /* Default-568h@2x.png */; };
-		4FD2A841178759D800C898D4 /* ScreenShotProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2A83F178759D800C898D4 /* ScreenShotProblemViewController.m */; };
 		4FD2A842178759D800C898D4 /* ScreenShotProblemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2A840178759D800C898D4 /* ScreenShotProblemViewController.xib */; };
 		4FD2A8441787601E00C898D4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD2A8431787601E00C898D4 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -46,8 +45,6 @@
 		4FD2A8331787595F00C898D4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4FD2A8351787595F00C898D4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4FD2A8371787595F00C898D4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		4FD2A83E178759D800C898D4 /* ScreenShotProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenShotProblemViewController.h; sourceTree = "<group>"; };
-		4FD2A83F178759D800C898D4 /* ScreenShotProblemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenShotProblemViewController.m; sourceTree = "<group>"; };
 		4FD2A840178759D800C898D4 /* ScreenShotProblemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenShotProblemViewController.xib; sourceTree = "<group>"; };
 		4FD2A8431787601E00C898D4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -101,8 +98,6 @@
 				4FD2A8301787595F00C898D4 /* AppDelegate.h */,
 				4FD2A8311787595F00C898D4 /* AppDelegate.m */,
 				4FD2A8281787595F00C898D4 /* Supporting Files */,
-				4FD2A83E178759D800C898D4 /* ScreenShotProblemViewController.h */,
-				4FD2A83F178759D800C898D4 /* ScreenShotProblemViewController.m */,
 				4FD2A840178759D800C898D4 /* ScreenShotProblemViewController.xib */,
 				3176D4D6EA96ED1D9AB71884 /* WebViewController.m */,
 				3176D9A745DAA92A1F9A15FE /* WebViewController.h */,
@@ -200,7 +195,6 @@
 			files = (
 				4FD2A82E1787595F00C898D4 /* main.m in Sources */,
 				4FD2A8321787595F00C898D4 /* AppDelegate.m in Sources */,
-				4FD2A841178759D800C898D4 /* ScreenShotProblemViewController.m in Sources */,
 				3176D5A7206C91E179D5FAEA /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
