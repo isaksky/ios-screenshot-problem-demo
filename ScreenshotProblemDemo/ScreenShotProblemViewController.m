@@ -24,6 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        
     }
     return self;
 }
@@ -35,13 +37,29 @@
     
     [self.textField becomeFirstResponder];
 
-    _screenShotTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self
-                                                      selector:@selector(takeScreenShot)
-                                                      userInfo:nil repeats:YES];
+//    _screenShotTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self
+//                                                      selector:@selector(takeScreenShot)
+//                                                      userInfo:nil repeats:YES];
+    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(50, 50, 300, 400)];
+    [self.view addSubview:webview];
+    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.imdb.com"]]];
+    
     
     [UIView animateWithDuration:10 animations:^{
         self.box.frame = [[UIScreen mainScreen] applicationFrame];
     }];
+    
+    [self tick];
+}
+
+- (void) tick{
+    [self takeScreenShot];
+    
+    if (_numScreenShots < 20){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [self tick];
+        });
+    }
 }
 
 -(void) takeScreenShot{
