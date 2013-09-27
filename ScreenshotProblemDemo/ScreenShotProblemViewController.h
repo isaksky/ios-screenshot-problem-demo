@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ScreenShotProblemViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIView *box;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
